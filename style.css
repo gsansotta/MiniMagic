@@ -536,11 +536,16 @@
             
             .categories {
                 gap: 8px;
+                margin-bottom: 0;
             }
             
             .category-btn {
                 padding: 8px 14px;
                 font-size: 13px;
+            }
+            
+            .container {
+                padding: 12px 20px;
             }
             
             .products-grid {
