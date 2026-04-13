@@ -526,6 +526,10 @@
         
         /* Responsive */
         @media (max-width: 768px) {
+            .banner {
+                display: none;
+            }
+            
             .banner h1 {
                 font-size: 32px;
             }
