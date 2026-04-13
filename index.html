@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Magic - Kids Store</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="assets/Head.webp" alt="Mini Magic Logo" class="logo-img">
+                <span class="logo-text">Mini Magic</span>
+            </div>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒 <span id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <div class="banner">
+        <h1>Bienvenido a Mi Tienda</h1>
+        <p>Descubre nuestros mejores productos</p>
+    </div>
+
+    <!-- Buscador -->
+ <!--    <div class="search-container">
+        <div class="search-box">
+            <input type="text" placeholder="🔍 Buscar productos..." id="search-input" onkeyup="filterProducts()">
+        </div>
+    </div>
+ -->
+    <!-- Categorías -->
+    <div class="categories">
+        <button class="category-btn active" onclick="filterByCategory('todos')">Todos</button>
+        <button class="category-btn" onclick="filterByCategory('ropa')">Ropa</button>
+        <button class="category-btn" onclick="filterByCategory('accesorios')">Accesorios</button>
+        <button class="category-btn" onclick="filterByCategory('electronica')">Electrónica</button>
+    </div>
+
+    <!-- Productos -->
+    <div class="container">
+        <div class="products-grid" id="products-grid">
+            <!-- Los productos se cargan aquí con JavaScript -->
+        </div>
+    </div>
+
+    <!-- Carrito Lateral -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Mi Carrito</h2>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <div class="cart-empty">Tu carrito está vacío</div>
+        </div>
+        <div class="cart-footer" id="cart-footer" style="display:none;">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span>$<span id="cart-total">0</span></span>
+            </div>
+            <button class="checkout-btn" onclick="abrirWhatsApp()">Comprar por WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Modal de Datos -->
+    <div id="modal-datos" class="modal-overlay">
+        <div class="modal-contenido">
+            <div class="modal-header">
+                <h2>Completa tus datos</h2>
+                <button class="modal-close" onclick="cerrarModal()">✕</button>
+            </div>
+            <form id="form-datos" onsubmit="enviarWhatsApp(event)">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" required placeholder="Tu nombre">
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" required placeholder="Tu apellido">
+                </div>
+                <div class="form-group">
+                    <label for="codigopostal">Código Postal:</label>
+                    <input type="text" id="codigopostal" required placeholder="Ej: 1234">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn-cancel" onclick="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="modal-btn-confirm">Enviar por WhatsApp</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Mini Magic - Kids Store. Todos los derechos reservados.</p>
+    </footer>
+
+    
+</body>
+</html>
