@@ -172,7 +172,7 @@
 
             mensaje += `💰 *TOTAL: $${total}*%0A%0A¿Cuál es el costo del envío y cuando pueden entregarlo?`;
 
-            const numeroWhatsApp = "1154811555"; // Cambiar por tu número
+            const numeroWhatsApp = "541154811555"; // Formato internacional para Argentina
             const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
             
             // Limpiar formulario
