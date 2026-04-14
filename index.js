@@ -15,6 +15,8 @@
         let carrito = [];
         let filtroCategoria = 'todos';
         let filtroTematica = 'todos';
+        let cantidadesInput = {}; // Guardar cantidades de inputs
+        let ultimaCantidadAgregada = {}; // Guardar última cantidad agregada de cada producto
 
         // Cargar productos al iniciar
         function cargarProductos() {
@@ -25,22 +27,26 @@
                 const cumpleCategoria = filtroCategoria === 'todos' || producto.categoria === filtroCategoria;
                 const cumpleTematica = filtroTematica === 'todos' || producto.tematica === filtroTematica;
                 if (cumpleCategoria && cumpleTematica) {
+                    const estaEnCarrito = carrito.find(item => item.id === producto.id);
+                    const cantidadEnCarrito = estaEnCarrito ? estaEnCarrito.cantidad : 0;
+                    const cantidadInput = cantidadesInput[producto.id] || 1;
+                    
                     const productoHTML = `
-                        <div class="product-card">
-                            <div class="product-image">
+                        <div class="product-card ${estaEnCarrito ? 'in-cart' : ''}"><div class="product-image">
                                 ${producto.imagen ? `<img src="${producto.imagen}" alt="${producto.nombre}">` : 'No Image'}
                             </div>
                             <div class="product-info">
                                 <div class="product-name">${producto.nombre}</div>
                                 <div class="product-description">${producto.descripcion}</div>
                                 <div class="product-price">$${producto.precio}</div>
+                                ${estaEnCarrito ? `<div class="cart-indicator">✓ En carrito (${cantidadEnCarrito})</div>` : ''}
                                 <div class="product-actions">
                                     <div class="qty-selector">
                                         <button onclick="changeQty(${producto.id}, -1)">−</button>
-                                        <input type="number" value="1" min="1" id="qty-${producto.id}">
+                                        <input type="number" value="${cantidadInput}" min="1" id="qty-${producto.id}" onchange="guardarCantidad(${producto.id})">
                                         <button onclick="changeQty(${producto.id}, 1)">+</button>
                                     </div>
-                                    <button class="add-btn" onclick="agregarAlCarrito(${producto.id})">Agregar</button>
+                                    <button class="add-btn ${estaEnCarrito ? 'in-cart-btn' : ''}" onclick="agregarAlCarrito(${producto.id})">Agregar</button>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +59,15 @@
         function changeQty(id, cambio) {
             const input = document.getElementById(`qty-${id}`);
             let valor = parseInt(input.value) + cambio;
-            if (valor > 0) input.value = valor;
+            if (valor > 0) {
+                input.value = valor;
+                guardarCantidad(id);
+            }
+        }
+
+        function guardarCantidad(id) {
+            const valor = parseInt(document.getElementById(`qty-${id}`).value);
+            cantidadesInput[id] = valor;
         }
 
         function agregarAlCarrito(id) {
@@ -61,18 +75,26 @@
             const cantidad = parseInt(document.getElementById(`qty-${id}`).value);
             
             const itemCarrito = carrito.find(item => item.id === id);
-            if (itemCarrito) {
+            
+            // Si el usuario cambió el contador manualmente, reemplazar en lugar de sumar
+            if (itemCarrito && ultimaCantidadAgregada[id] && ultimaCantidadAgregada[id] !== cantidad) {
+                itemCarrito.cantidad = cantidad;
+            } else if (itemCarrito) {
                 itemCarrito.cantidad += cantidad;
             } else {
                 carrito.push({ ...producto, cantidad });
             }
             
-            document.getElementById(`qty-${id}`).value = 1;
+            ultimaCantidadAgregada[id] = cantidad;
+            guardarCantidad(id);
+            cargarProductos();
             actualizarCarrito();
         }
 
         function eliminarDelCarrito(id) {
             carrito = carrito.filter(item => item.id !== id);
+            ultimaCantidadAgregada[id] = 0; // Resetear para que el próximo agregar sea suma normal
+            cargarProductos();
             actualizarCarrito();
         }
 
@@ -85,6 +107,8 @@
                 cartItems.innerHTML = '<div class="cart-empty">Tu carrito está vacío</div>';
                 cartFooter.style.display = 'none';
                 cartCount.textContent = '0';
+                cantidadesInput = {}; // Resetear cantidades cuando se vacía carrito
+                ultimaCantidadAgregada = {}; // Resetear últimas cantidades agregadas
                 return;
             }
 
