@@ -37,9 +37,35 @@
     <!-- Categorías -->
     <div class="categories">
         <button class="category-btn active" onclick="filterByCategory('todos')">Todos</button>
-        <button class="category-btn" onclick="filterByCategory('ropa')">Ropa</button>
-        <button class="category-btn" onclick="filterByCategory('accesorios')">Accesorios</button>
-        <button class="category-btn" onclick="filterByCategory('electronica')">Electrónica</button>
+        <button class="category-btn" onclick="filterByCategory('gorros-invierno')">Gorros de invierno</button>
+        <button class="category-btn" onclick="filterByCategory('cuellitos')">Cuellitos</button>
+        <button class="category-btn" onclick="filterByCategory('guantes')">Guantes</button>
+        <button class="category-btn" onclick="filterByCategory('rioneras')">Riñoneras</button>
+        <button class="category-btn" onclick="filterByCategory('mantas-peluche')">Mantas con peluche</button>
+        <button class="category-btn" onclick="filterByCategory('orejeras')">Orejeras</button>
+    </div>
+
+    <!-- Temáticas -->
+    <div class="tematicas-filter">
+        <div class="tematicas-label">🎨 Temática</div>
+        <div class="tematicas-buttons">
+            <button class="tematica-btn" onclick="filterByTematica('minnie')">Minnie</button>
+            <button class="tematica-btn" onclick="filterByTematica('mickey')">Mickey</button>
+            <button class="tematica-btn" onclick="filterByTematica('stitch')">Lilo y Stitch</button>
+            <button class="tematica-btn" onclick="filterByTematica('jurassic')">Jurassic Park</button>
+            <button class="tematica-btn" onclick="filterByTematica('paw-patrol')">Paw Patrol</button>
+            <button class="tematica-btn" onclick="filterByTematica('frozen')">Frozen</button>
+            <button class="tematica-btn" onclick="filterByTematica('avengers')">Avengers</button>
+            <button class="tematica-btn" onclick="filterByTematica('spider-man')">Spider Man</button>
+            <button class="tematica-btn" onclick="filterByTematica('cars')">Cars</button>
+            <button class="tematica-btn" onclick="filterByTematica('barbie')">Barbie</button>
+        </div>
+    </div>
+
+    <!-- Filtros Activos -->
+    <div class="active-filters" id="active-filters" style="display:none;">
+        <div class="filters-label">Filtros activos:</div>
+        <div class="filters-pills" id="filters-pills"></div>
     </div>
 
     <!-- Productos -->

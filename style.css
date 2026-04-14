@@ -117,8 +117,8 @@
             padding: 0 20px;
             display: flex;
             gap: 10px;
-            overflow-x: auto;
-            border-bottom: none;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         
         .category-btn {
@@ -129,6 +129,7 @@
             cursor: pointer;
             white-space: nowrap;
             transition: all 0.3s;
+            font-size: 14px;
         }
         
         .category-btn:hover,
@@ -136,6 +137,100 @@
             background: linear-gradient(135deg, #D946A6 0%, #C24BA8 100%);
             color: white;
             border-color: #D946A6;
+        }
+
+        /* Temáticas */
+        .tematicas-filter {
+            max-width: 1200px;
+            margin: 20px auto 30px;
+            padding: 0 20px;
+        }
+
+        .tematicas-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tematicas-buttons {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            flex-wrap: wrap;
+            padding-bottom: 8px;
+        }
+
+        .tematica-btn {
+            background: white;
+            border: 2px solid #e0e0e0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+
+        .tematica-btn:hover,
+        .tematica-btn.active {
+            background: linear-gradient(135deg, #D946A6 0%, #C24BA8 100%);
+            color: white;
+            border-color: #D946A6;
+        }
+
+        /* Filtros Activos */
+        .active-filters {
+            max-width: 1200px;
+            margin: 0 auto 20px;
+            padding: 15px 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .filters-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .filters-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-pill {
+            background: linear-gradient(135deg, #D946A6 0%, #C24BA8 100%);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .remove-filter {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .remove-filter:hover {
+            opacity: 0.8;
         }
         
         /* Productos */
@@ -541,16 +636,48 @@
             
             .categories {
                 gap: 8px;
-                margin: 0;
-                margin-top: 15px;
+                margin: 15px auto;
                 padding: 15px 20px;
-                overflow-x: hidden;
-                border-bottom: none;
+                flex-wrap: wrap;
+                justify-content: flex-start;
             }
             
             .category-btn {
                 padding: 8px 14px;
-                font-size: 13px;
+                font-size: 12px;
+            }
+
+            .tematicas-filter {
+                margin: 15px 0 20px 0;
+                padding: 15px 20px;
+            }
+
+            .tematicas-label {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+
+            .tematicas-buttons {
+                gap: 8px;
+            }
+
+            .tematica-btn {
+                padding: 7px 12px;
+                font-size: 12px;
+            }
+
+            .active-filters {
+                margin: 0 20px 20px 20px;
+                padding: 12px 15px;
+            }
+
+            .filters-label {
+                font-size: 11px;
+            }
+
+            .filter-pill {
+                padding: 6px 10px;
+                font-size: 12px;
             }
             
             .container {

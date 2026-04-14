@@ -14,6 +14,7 @@
 
         let carrito = [];
         let filtroCategoria = 'todos';
+        let filtroTematica = 'todos';
 
         // Cargar productos al iniciar
         function cargarProductos() {
@@ -21,7 +22,9 @@
             grid.innerHTML = '';
 
             productos.forEach(producto => {
-                if (filtroCategoria === 'todos' || producto.categoria === filtroCategoria) {
+                const cumpleCategoria = filtroCategoria === 'todos' || producto.categoria === filtroCategoria;
+                const cumpleTematica = filtroTematica === 'todos' || producto.tematica === filtroTematica;
+                if (cumpleCategoria && cumpleTematica) {
                     const productoHTML = `
                         <div class="product-card">
                             <div class="product-image">
@@ -117,9 +120,63 @@
 
         function filterByCategory(categoria) {
             filtroCategoria = categoria;
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            document.querySelectorAll('.category-btn').forEach((btn, idx) => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(categoria === 'todos' ? 'todos' : categoria)) {
+                    btn.classList.add('active');
+                }
+            });
             cargarProductos();
+            actualizarFiltrosActivos();
+        }
+
+        function filterByTematica(tematica) {
+            filtroTematica = (filtroTematica === tematica) ? 'todos' : tematica;
+            document.querySelectorAll('.tematica-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (filtroTematica !== 'todos' && btn.textContent.toLowerCase().includes(filtroTematica)) {
+                    btn.classList.add('active');
+                }
+            });
+            cargarProductos();
+            actualizarFiltrosActivos();
+        }
+
+        function removeTematica() {
+            filtroTematica = 'todos';
+            document.querySelectorAll('.tematica-btn').forEach(btn => btn.classList.remove('active'));
+            cargarProductos();
+            actualizarFiltrosActivos();
+        }
+
+        function actualizarFiltrosActivos() {
+            const activeFiltersDiv = document.getElementById('active-filters');
+            const filtersPills = document.getElementById('filters-pills');
+            let html = '';
+
+            if (filtroCategoria !== 'todos') {
+                const categoriaLabel = {
+                    'gorros-invierno': 'Gorros de invierno',
+                    'cuellitos': 'Cuellitos',
+                    'guantes': 'Guantes',
+                    'rioneras': 'Riñoneras',
+                    'mantas-peluche': 'Mantas con peluche',
+                    'orejeras': 'Orejeras'
+                }[filtroCategoria];
+                
+                html += `<span class="filter-pill">${categoriaLabel} <button class="remove-filter" onclick="filterByCategory('todos')">x</button></span>`;
+            }
+
+            if (filtroTematica !== 'todos') {
+                html += `<span class="filter-pill">${filtroTematica} <button class="remove-filter" onclick="removeTematica()">x</button></span>`;
+            }
+
+            if (html) {
+                filtersPills.innerHTML = html;
+                activeFiltersDiv.style.display = 'block';
+            } else {
+                activeFiltersDiv.style.display = 'none';
+            }
         }
 
         function filterProducts() {
