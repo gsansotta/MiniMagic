@@ -41,12 +41,12 @@
                                 <div class="product-price">$${producto.precio}</div>
                                 ${estaEnCarrito ? `<div class="cart-indicator">✓ En carrito (${cantidadEnCarrito})</div>` : ''}
                                 <div class="product-actions">
-                                    <div class="qty-selector">
-                                        <button onclick="changeQty(${producto.id}, -1)">−</button>
-                                        <input type="number" value="${cantidadInput}" min="1" id="qty-${producto.id}" onchange="guardarCantidad(${producto.id})">
-                                        <button onclick="changeQty(${producto.id}, 1)">+</button>
+                                    <div class="qty-selector ${estaEnCarrito ? 'disabled' : ''}">
+                                        <button onclick="changeQty(${producto.id}, -1)" ${estaEnCarrito ? 'disabled' : ''}>−</button>
+                                        <input type="number" value="${cantidadInput}" min="1" id="qty-${producto.id}" onchange="guardarCantidad(${producto.id})" ${estaEnCarrito ? 'disabled' : ''}>
+                                        <button onclick="changeQty(${producto.id}, 1)" ${estaEnCarrito ? 'disabled' : ''}>+</button>
                                     </div>
-                                    <button class="add-btn ${estaEnCarrito ? 'in-cart-btn' : ''}" onclick="agregarAlCarrito(${producto.id})">Agregar</button>
+                                    ${estaEnCarrito ? `<button class="add-btn in-cart-btn" onclick="eliminarDelCarrito(${producto.id})">Eliminar</button>` : `<button class="add-btn" onclick="agregarAlCarrito(${producto.id})">Agregar</button>`}
                                 </div>
                             </div>
                         </div>
